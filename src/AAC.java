@@ -1,6 +1,7 @@
 import javax.swing.JFrame; 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import structures.KeyNotFoundException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton; 
 
@@ -195,7 +196,11 @@ public class AAC implements ActionListener {
 		}
 		else {
 			if(this.aacMappings.getCurrentCategory().equals("")) {
-				this.aacMappings.getText(actionCommand);
+				try {
+					this.aacMappings.getText(actionCommand);
+				} catch (KeyNotFoundException e1) {
+					e1.printStackTrace();
+				}
 				this.images = this.aacMappings.getImageLocs();
 				this.startIndex = 0;
 				this.endIndex = Math.min(NUM_ACROSS*NUM_DOWN, this.images.length);
